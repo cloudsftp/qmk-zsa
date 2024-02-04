@@ -71,98 +71,112 @@ void keyboard_post_init_user(void) {
 
 #define DEGREE(x) (int) (x * 255. / 360.)
 
-#define OFF       { 0,            0,            0}
-#define BASE_BLUE { 169,          255,          255}
-#define DEEP_BLUE { DEGREE(270),  255,          255}
+#define OFF         { 0,            0,              0}
+#define WHITE       { 0,            0,              255}
 
-#define RED       { 0,            255,          255}
+#define BASE_BLUE   { DEGREE(235),  DEGREE(270),    DEGREE(270)}
+#define DEEP_BLUE   { DEGREE(245),  255,            255}
 
-#define TO_WSP    { 106,          255,          255}
-#define MV_WSP    { 21,           255,          255}
+#define VIOLET      { DEGREE(255),  255,            255}
+#define RED         { DEGREE(  0),  255,            255}
+#define ORANGE      { DEGREE( 30),  255,            255}
+
+#define GREEN       { DEGREE(120),  255,            255}
+#define LIME        { DEGREE( 90),  255,            255}
+
+#define NUMPAD      VIOLET
+#define BRACKETS    GREEN
+#define TO_WSP      GREEN
+#define MV_WSP      ORANGE
+#define ARROWS      GREEN
+#define POSITION    LIME
+#define PLAY        ORANGE
+#define VOLUME      DEEP_BLUE
+#define SKIP        ORANGE
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     [0] = {
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        RED,           DEEP_BLUE,     DEEP_BLUE,     DEEP_BLUE,     DEEP_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-                                                                    BASE_BLUE,     BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        RED,            DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+                                                                        DEEP_BLUE,      DEEP_BLUE,
 
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     DEEP_BLUE,     DEEP_BLUE,     DEEP_BLUE,     DEEP_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        DEEP_BLUE,      DEEP_BLUE
     },
 
     [1] = {
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE, {106,255,255}, {106,255,255},     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE, {106,255,255}, {106,255,255},     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE, {106,255,255}, {106,255,255},     BASE_BLUE,
-                                                                    BASE_BLUE,     BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BRACKETS,       BRACKETS,       BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BRACKETS,       BRACKETS,       BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BRACKETS,       BRACKETS,       BASE_BLUE,
+                                                                        WHITE,          BASE_BLUE,
 
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     {222,255,255}, {222,255,255}, {222,255,255}, BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     {222,255,255}, {222,255,255}, {222,255,255}, BASE_BLUE,     BASE_BLUE,
-        {222,255,255}, {222,255,255}, {222,255,255}, {222,255,255}, BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      NUMPAD,         NUMPAD,         NUMPAD,         BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      NUMPAD,         NUMPAD,         NUMPAD,         BASE_BLUE,      BASE_BLUE,
+        NUMPAD,         NUMPAD,         NUMPAD,         NUMPAD,         BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      WHITE
     },
 
     [2] = {
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-                                                                    BASE_BLUE,     BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+                                                                        BASE_BLUE,      WHITE,
 
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      RED,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        ARROWS,         ARROWS,         ARROWS,         ARROWS,         BASE_BLUE,      BASE_BLUE,
+        POSITION,       POSITION,       POSITION,       POSITION,       BASE_BLUE,      WHITE,
+        BASE_BLUE,      BASE_BLUE
     },
 
     [3] = {
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-                                                                    OFF,           OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            WHITE,          OFF,            OFF,
+                                                                        OFF,            OFF,
 
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           TO_WSP,        TO_WSP,        TO_WSP,        OFF,           OFF,
-        OFF,           TO_WSP,        TO_WSP,        TO_WSP,        OFF,           OFF,
-        TO_WSP,        TO_WSP,        TO_WSP,        TO_WSP,        OFF,           OFF,
-        OFF,           OFF
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            TO_WSP,         TO_WSP,         TO_WSP,         OFF,            OFF,
+        OFF,            TO_WSP,         TO_WSP,         TO_WSP,         OFF,            OFF,
+        TO_WSP,         TO_WSP,         TO_WSP,         TO_WSP,         OFF,            OFF,
+        OFF,            OFF
     },
 
     [4] = {
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-                                                                    OFF,           OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            WHITE,          OFF,            OFF,            OFF,
+                                                                        OFF,            OFF,
 
-        OFF,           OFF,           OFF,           OFF,           OFF,           OFF,
-        OFF,           MV_WSP,        MV_WSP,        MV_WSP,        OFF,           OFF,
-        OFF,           MV_WSP,        MV_WSP,        MV_WSP,        OFF,           OFF,
-        MV_WSP,        MV_WSP,        MV_WSP,        MV_WSP,        OFF,           OFF,
-        OFF,           OFF
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            MV_WSP,         MV_WSP,         MV_WSP,         OFF,            OFF,
+        OFF,            MV_WSP,         MV_WSP,         MV_WSP,         OFF,            OFF,
+        MV_WSP,         MV_WSP,         MV_WSP,         MV_WSP,         OFF,            OFF,
+        OFF,            OFF
     },
 
     [5] = {
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-                                                                    BASE_BLUE,     BASE_BLUE,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            WHITE,          OFF,
+                                                                        OFF,            OFF,
 
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,     BASE_BLUE,
-        BASE_BLUE,     BASE_BLUE
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
+        OFF,            VOLUME,         VOLUME,         PLAY,           OFF,            OFF,
+        OFF,            SKIP,           SKIP,           OFF,            OFF,            OFF,
+        OFF,            OFF
     },
 
 };
