@@ -9,6 +9,15 @@ enum custom_keycodes {
   HSV_74_255_255,
   HSV_169_255_255,
   MOVE_AND_SWITCH_0,
+  MOVE_AND_SWITCH_1,
+  MOVE_AND_SWITCH_2,
+  MOVE_AND_SWITCH_3,
+  MOVE_AND_SWITCH_4,
+  MOVE_AND_SWITCH_5,
+  MOVE_AND_SWITCH_6,
+  MOVE_AND_SWITCH_7,
+  MOVE_AND_SWITCH_8,
+  MOVE_AND_SWITCH_9,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -49,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [5] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, LGUI(LSFT(KC_KP_7)),LGUI(LSFT(KC_KP_8)),LGUI(LSFT(KC_KP_9)),KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, LGUI(LSFT(KC_KP_4)),LGUI(LSFT(KC_KP_5)),LGUI(LSFT(KC_KP_6)),KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 MOVE_AND_SWITCH_0,LGUI(LSFT(KC_KP_1)),LGUI(LSFT(KC_KP_2)),LGUI(LSFT(KC_KP_3)),KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, MOVE_AND_SWITCH_7,MOVE_AND_SWITCH_8,MOVE_AND_SWITCH_9,KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, MOVE_AND_SWITCH_4,MOVE_AND_SWITCH_5,MOVE_AND_SWITCH_6,KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 MOVE_AND_SWITCH_0,MOVE_AND_SWITCH_1,MOVE_AND_SWITCH_2,MOVE_AND_SWITCH_3,KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [6] = LAYOUT_voyager(
@@ -244,6 +253,17 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
+void move_and_switch(char *workspace, keyrecord_t *record) {
+  if (record->event.pressed) {
+    register_code(KC_LGUI);
+    register_code(KC_LSFT);
+    SEND_STRING(workspace);
+    unregister_code(KC_LSFT);
+    SEND_STRING(workspace);
+    unregister_code(KC_LGUI);
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case RGB_SLD:
@@ -271,14 +291,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     // Move and switch to workspace
     case MOVE_AND_SWITCH_0:
-      if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LSFT);
-        SEND_STRING("0");
-        unregister_code(KC_LSFT);
-        SEND_STRING("0");
-        unregister_code(KC_LGUI);
-      }
+      move_and_switch("0", record);
       return false;
   }
   return true;
