@@ -181,7 +181,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
         OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
         OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
         OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
-        OFF,            OFF,            WHITE,          OFF,            OFF,            OFF,
+        OFF,            OFF,            WHITE,          WHITE,          OFF,            OFF,
                                                                         OFF,            OFF,
 
         OFF,            OFF,            OFF,            OFF,            OFF,            OFF,
