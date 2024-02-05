@@ -77,7 +77,7 @@ void keyboard_post_init_user(void) {
 #define BASE_BLUE   { DEGREE(235),  DEGREE(270),    DEGREE(270)}
 #define DEEP_BLUE   { DEGREE(245),  255,            255}
 
-#define VIOLET      { DEGREE(255),  255,            255}
+#define VIOLET      { DEGREE(270),  255,            255}
 #define RED         { DEGREE(  0),  255,            255}
 #define ORANGE      { DEGREE( 30),  255,            255}
 
@@ -91,7 +91,7 @@ void keyboard_post_init_user(void) {
 #define ARROWS      GREEN
 #define POSITION    LIME
 #define PLAY        ORANGE
-#define VOLUME      DEEP_BLUE
+#define VOLUME      GREEN
 #define SKIP        ORANGE
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
