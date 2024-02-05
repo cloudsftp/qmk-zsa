@@ -245,6 +245,9 @@ bool rgb_matrix_indicators_user(void) {
     case 5:
       set_layer_color(5);
       break;
+    case 6:
+      set_layer_color(5);
+      break;
    default:
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
       rgb_matrix_set_color_all(0, 0, 0);
@@ -292,6 +295,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Move and switch to workspace
     case MOVE_AND_SWITCH_0:
       move_and_switch("0", record);
+      return false;
+    case MOVE_AND_SWITCH_1:
+      move_and_switch("1", record);
+      return false;
+    case MOVE_AND_SWITCH_2:
+      move_and_switch("2", record);
+      return false;
+    case MOVE_AND_SWITCH_3:
+      move_and_switch("3", record);
+      return false;
+    case MOVE_AND_SWITCH_4:
+      move_and_switch("4", record);
+      return false;
+    case MOVE_AND_SWITCH_5:
+      move_and_switch("5", record);
+      return false;
+    case MOVE_AND_SWITCH_6:
+      move_and_switch("6", record);
+      return false;
+    case MOVE_AND_SWITCH_7:
+      move_and_switch("7", record);
+      return false;
+    case MOVE_AND_SWITCH_8:
+      move_and_switch("8", record);
+      return false;
+    case MOVE_AND_SWITCH_9:
+      move_and_switch("9", record);
       return false;
   }
   return true;
