@@ -246,7 +246,7 @@ bool rgb_matrix_indicators_user(void) {
       set_layer_color(5);
       break;
     case 6:
-      set_layer_color(5);
+      set_layer_color(6);
       break;
    default:
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
