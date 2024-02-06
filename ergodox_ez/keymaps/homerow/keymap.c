@@ -13,12 +13,13 @@ enum tap_dance_codes {
   DANCE_2,
 };
 
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_ergodox_pretty(
     DE_CIRC,        KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_TRANSPARENT,                                 TG(3),          KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           DE_SS,
     DE_LESS,        KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           TT(1),                                          TT(1),          DE_Z,           KC_U,           KC_I,           KC_O,           KC_P,           DE_PLUS,
-    KC_ESCAPE,      MT(MOD_LGUI, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                                                           KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RGUI, KC_K),MT(MOD_LALT, KC_L),MT(MOD_RGUI, DE_ODIA),DE_HASH,
-    DE_ACUT,        DE_Y,           KC_X,           KC_C,           LT(2,KC_V),     KC_B,           KC_HYPR,                                        KC_MEH,         MT(MOD_RALT, KC_N),KC_M,           KC_COMMA,       KC_DOT,         DE_MINS,        KC_CAPS,
+    KC_ESCAPE,      MT(MOD_LGUI, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                               KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_LALT, KC_L),MT(MOD_RGUI, DE_ODIA), DE_HASH,
+    DE_ACUT,        DE_Y,           KC_X,           KC_C,           LT(2,KC_V),     KC_B,           KC_HYPR,                                        KC_MEH,         MT(MOD_RALT, KC_N),KC_M,        KC_COMMA,       KC_DOT,         DE_MINS,        KC_CAPS,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_LEFT,        KC_RIGHT,                                                                                                       KC_DOWN,        KC_UP,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_APPLICATION, KC_TRANSPARENT, KC_TRANSPARENT, KC_DELETE,
                                                                                                                     KC_END,         KC_PAGE_UP,
@@ -55,6 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
 };
+// clang-format on
 
 
 const uint16_t PROGMEM combo0[] = { DE_MINS, MT(MOD_LALT, KC_S), COMBO_END};
