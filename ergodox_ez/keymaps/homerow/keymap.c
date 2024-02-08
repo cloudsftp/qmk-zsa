@@ -4,6 +4,16 @@
 
 enum custom_keycodes {
   RGB_SLD = SAFE_RANGE,
+  MOVE_AND_SWITCH_0,
+  MOVE_AND_SWITCH_1,
+  MOVE_AND_SWITCH_2,
+  MOVE_AND_SWITCH_3,
+  MOVE_AND_SWITCH_4,
+  MOVE_AND_SWITCH_5,
+  MOVE_AND_SWITCH_6,
+  MOVE_AND_SWITCH_7,
+  MOVE_AND_SWITCH_8,
+  MOVE_AND_SWITCH_9,
 };
 
 
@@ -67,19 +77,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, LGUI(KC_7),     LGUI(KC_8),     LGUI(KC_9),     KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                KC_TRANSPARENT, LGUI(KC_4),     LGUI(KC_5),     LGUI(KC_6),     KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, LGUI(KC_0),     LGUI(KC_1),     LGUI(KC_2),     LGUI(KC_3),     KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, MO(6),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, LGUI(KC_0),     LGUI(KC_1),     LGUI(KC_2),     LGUI(KC_3),     KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
-  // Switch workspace
+  // Move to workspace
   [5] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, LGUI(LSFT(KC_7)),LGUI(LSFT(KC_8)),LGUI(LSFT(KC_9)),KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                KC_TRANSPARENT, LGUI(LSFT(KC_4)),LGUI(LSFT(KC_5)),LGUI(LSFT(KC_6)),KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, LGUI(LSFT(KC_0)),LGUI(LSFT(KC_1)),LGUI(LSFT(KC_2)),LGUI(LSFT(KC_3)),KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, MO(6),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, LGUI(LSFT(KC_0)),LGUI(LSFT(KC_1)),LGUI(LSFT(KC_2)),LGUI(LSFT(KC_3)),KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                                                                    KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+
+  // Move to workspace
+  [6] = LAYOUT_ergodox_pretty(
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, MOVE_AND_SWITCH_7,MOVE_AND_SWITCH_8,MOVE_AND_SWITCH_9,KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                KC_TRANSPARENT, MOVE_AND_SWITCH_4,MOVE_AND_SWITCH_5,MOVE_AND_SWITCH_6,KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, MOVE_AND_SWITCH_0,MOVE_AND_SWITCH_1,MOVE_AND_SWITCH_2,MOVE_AND_SWITCH_3,KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
                                                                                                                     KC_TRANSPARENT, KC_TRANSPARENT,
@@ -95,41 +117,86 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, RCTL(KC_S)),
 };
 
+void move_and_switch(uint16_t workspace, keyrecord_t *record) {
+  if (record->event.pressed) {
+    register_code(KC_LGUI);
+    register_code(KC_LSFT);
+    register_code(workspace);
+    unregister_code(workspace);
+
+    unregister_code(KC_LSFT);
+    register_code(workspace);
+    unregister_code(workspace);
+
+    unregister_code(KC_LGUI);
+  }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-
+    // Move and switch to workspace
+    case MOVE_AND_SWITCH_0:
+      move_and_switch(KC_0, record);
+      return false;
+    case MOVE_AND_SWITCH_1:
+      move_and_switch(KC_1, record);
+      return false;
+    case MOVE_AND_SWITCH_2:
+      move_and_switch(KC_2, record);
+      return false;
+    case MOVE_AND_SWITCH_3:
+      move_and_switch(KC_3, record);
+      return false;
+    case MOVE_AND_SWITCH_4:
+      move_and_switch(KC_4, record);
+      return false;
+    case MOVE_AND_SWITCH_5:
+      move_and_switch(KC_5, record);
+      return false;
+    case MOVE_AND_SWITCH_6:
+      move_and_switch(KC_6, record);
+      return false;
+    case MOVE_AND_SWITCH_7:
+      move_and_switch(KC_7, record);
+      return false;
+    case MOVE_AND_SWITCH_8:
+      move_and_switch(KC_8, record);
+      return false;
+    case MOVE_AND_SWITCH_9:
+      move_and_switch(KC_9, record);
+      return false;
   }
   return true;
 }
 
+// LEDs
+
 uint8_t layer_state_set_user(uint8_t state) {
     uint8_t layer = biton(state);
   ergodox_board_led_off();
-  ergodox_right_led_1_off();
-  ergodox_right_led_2_off();
-  ergodox_right_led_3_off();
+  ergodox_right_led_1_off(); // red
+  ergodox_right_led_2_off(); // green
+  ergodox_right_led_3_off(); // blue
   switch (layer) {
     case 1:
-      ergodox_right_led_1_on();
+      ergodox_right_led_3_on();
       break;
     case 2:
+      ergodox_right_led_3_on();
       ergodox_right_led_2_on();
       break;
     case 3:
-      ergodox_right_led_3_on();
+      ergodox_right_led_2_on();
       break;
     case 4:
-      ergodox_right_led_1_on();
       ergodox_right_led_2_on();
       break;
     case 5:
       ergodox_right_led_1_on();
-      ergodox_right_led_3_on();
       break;
     case 6:
+      ergodox_right_led_1_on();
       ergodox_right_led_2_on();
-      ergodox_right_led_3_on();
       break;
     case 7:
       ergodox_right_led_1_on();
@@ -142,6 +209,7 @@ uint8_t layer_state_set_user(uint8_t state) {
   return state;
 };
 
+// Tap dance
 
 typedef struct {
     bool is_press_action;
