@@ -211,9 +211,7 @@ uint8_t layer_state_set_user(uint8_t state) {
       ergodox_right_led_2_on();
       break;
     case 7:
-      ergodox_right_led_1_on();
       ergodox_right_led_2_on();
-      ergodox_right_led_3_on();
       break;
     default:
       break;
