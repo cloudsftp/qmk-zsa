@@ -24,3 +24,5 @@
 #define DE_AMPR S(KC_6)
 #define DE_SLSH S(KC_7)
 #define DE_ASTR S(KC_RBRC)
+#define DE_AE KC_QUOT
+#define DE_UE KC_LBRC

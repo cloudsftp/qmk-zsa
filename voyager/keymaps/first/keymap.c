@@ -24,10 +24,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     DE_CIRC,        KC_1,           KC_2,           KC_3,           KC_4,           KC_5,                                           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           DE_SS,
     DE_LESS,        KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           DE_PLUS,
-    KC_ESCAPE,      MT(MOD_LGUI, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                           KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_RALT, KC_L),MT(MOD_RGUI, DE_OE),DE_HASH,
+    KC_ESCAPE,      MT(MOD_LGUI, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),LT(7, KC_G),                        LT(7, KC_H),    MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_RALT, KC_L),MT(MOD_RGUI, DE_OE),DE_HASH,
     DE_ACUT,        KC_Z,           LT(4,KC_X),     LT(3,KC_C),     LT(6,KC_V),     KC_B,                                           MT(MOD_RALT, KC_N),KC_M,           KC_COMMA,       KC_DOT,         DE_MINS,        LT(2,KC_CAPS),
                                                                     LT(1,KC_SPC),   LT(2,KC_TAB),                                   KC_BSPC,  LT(1,KC_ENTER)
   ),
+
+  [7] = LAYOUT_voyager(
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, DE_UE,          KC_TRANSPARENT, DE_OE,          KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, DE_AE,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+                                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
+  ),
+
+  // Symbols + Numpad
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,                                          KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         KC_F11,
     KC_TRANSPARENT, DE_AT,          DE_LESS,        DE_LCBR,        DE_RCBR,        DE_BSLS,                                        DE_SLSH,        KC_7,           KC_8,           KC_9,           DE_MINS,        KC_F12,
@@ -35,6 +45,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     DE_DLR,         DE_TILD,        DE_MORE,        DE_LBRC,        DE_RBRC,        DE_AMPR,                                        KC_0,           KC_1,           KC_2,           KC_3,           KC_DOT,         KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
+
+  // Movement + RGB
   [2] = LAYOUT_voyager(
     RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_SLD,        RGB_VAD,        RGB_VAI,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
     RGB_SPD,        RGB_SPI,        KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,RGB_HUD,        RGB_HUI,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
@@ -42,6 +54,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, HSV_0_255_255,  HSV_74_255_255, HSV_169_255_255,                                KC_HOME,        KC_PGDN,        KC_PAGE_UP,     KC_END,         KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
+
+  // Switch to workspace
   [3] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, LGUI(KC_KP_7),  LGUI(KC_KP_8),  LGUI(KC_KP_9),  KC_TRANSPARENT, KC_TRANSPARENT,
@@ -49,6 +63,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, MO(5),          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 LGUI(KC_KP_0),  LGUI(KC_KP_1),  LGUI(KC_KP_2),  LGUI(KC_KP_3),  KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
+
+  // Move to workspace
   [4] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, LGUI(LSFT(KC_KP_7)),LGUI(LSFT(KC_KP_8)),LGUI(LSFT(KC_KP_9)),KC_TRANSPARENT, KC_TRANSPARENT,
@@ -56,6 +72,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, MO(5),          KC_TRANSPARENT, KC_TRANSPARENT,                                 LGUI(LSFT(KC_KP_0)),LGUI(LSFT(KC_KP_1)),LGUI(LSFT(KC_KP_2)),LGUI(LSFT(KC_KP_3)),KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
+
+  // Move and switch to workspace
   [5] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, MOVE_AND_SWITCH_7,MOVE_AND_SWITCH_8,MOVE_AND_SWITCH_9,KC_TRANSPARENT, KC_TRANSPARENT,
@@ -63,6 +81,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 MOVE_AND_SWITCH_0,MOVE_AND_SWITCH_1,MOVE_AND_SWITCH_2,MOVE_AND_SWITCH_3,KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
+
+  // Audio + reset
   [6] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
@@ -95,6 +115,7 @@ void keyboard_post_init_user(void) {
 #define GREEN       { DEGREE(120),  255,            255}
 #define LIME        { DEGREE( 90),  255,            255}
 
+#define UMLAUT      VIOLET
 #define NUMPAD      VIOLET
 #define BRACKETS    GREEN
 #define TO_WSP      GREEN
@@ -102,7 +123,7 @@ void keyboard_post_init_user(void) {
 #define BOTH_WSP    LIME
 #define ARROWS      GREEN
 #define POSITION    LIME
-#define PLAY        ORANGE
+#define PLAY        RED
 #define VOLUME      GREEN
 #define SKIP        ORANGE
 
@@ -116,6 +137,20 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
 
         BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
         BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        DEEP_BLUE,      DEEP_BLUE
+    },
+
+    [7] = {
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        RED,            UMLAUT,         DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      BASE_BLUE,
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+                                                                        DEEP_BLUE,      DEEP_BLUE,
+
+        BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
+        BASE_BLUE,      UMLAUT,         BASE_BLUE,      UMLAUT,         BASE_BLUE,      BASE_BLUE,
         BASE_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      DEEP_BLUE,      BASE_BLUE,
         BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,      BASE_BLUE,
         DEEP_BLUE,      DEEP_BLUE
@@ -247,6 +282,9 @@ bool rgb_matrix_indicators_user(void) {
       break;
     case 6:
       set_layer_color(6);
+      break;
+    case 7:
+      set_layer_color(7);
       break;
    default:
     if (rgb_matrix_get_flags() == LED_FLAG_NONE)
