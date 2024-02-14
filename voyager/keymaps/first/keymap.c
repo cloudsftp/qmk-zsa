@@ -19,6 +19,7 @@ enum custom_keycodes {
   MOVE_AND_SWITCH_7,
   MOVE_AND_SWITCH_8,
   MOVE_AND_SWITCH_9,
+  KC_UUID,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -49,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   // Movement + RGB
   [2] = LAYOUT_voyager(
-    RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_SLD,        RGB_VAD,        RGB_VAI,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
-    RGB_SPD,        RGB_SPI,        KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,RGB_HUD,        RGB_HUI,                                        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,KC_MEDIA_STOP,  KC_MEDIA_PLAY_PAUSE,KC_TRANSPARENT,                                 KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT,
+    RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_SLD,        RGB_VAD,        RGB_VAI,                                    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
+    RGB_SPD,        RGB_SPI,        KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,RGB_HUD,        RGB_HUI,                                      KC_TRANSPARENT, KC_UUID,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_MEDIA_NEXT_TRACK,KC_MEDIA_STOP,  KC_MEDIA_PLAY_PAUSE,KC_TRANSPARENT,                     KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, HSV_0_255_255,  HSV_74_255_255, HSV_169_255_255,                                KC_HOME,        KC_PGDN,        KC_PAGE_UP,     KC_END,         KC_TRANSPARENT, KC_TRANSPARENT,
                                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
   ),
@@ -296,14 +297,22 @@ bool rgb_matrix_indicators_user(void) {
 }
 
 void move_and_switch(char *workspace, keyrecord_t *record) {
-  if (record->event.pressed) {
+    if (!record->event.pressed) {
+        return;
+    }
     register_code(KC_LGUI);
     register_code(KC_LSFT);
     SEND_STRING(workspace);
     unregister_code(KC_LSFT);
     SEND_STRING(workspace);
     unregister_code(KC_LGUI);
-  }
+}
+
+char* random_uuid_string(void);
+void output_uuid(void) {
+    char* uuid_string = random_uuid_string();
+    SEND_STRING(uuid_string);
+    free(uuid_string);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -361,6 +370,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case MOVE_AND_SWITCH_9:
       move_and_switch("9", record);
+      return false;
+    case KC_UUID:
+      output_uuid();
       return false;
   }
   return true;
@@ -439,4 +451,14 @@ void uuid_to_string(char* uuid_string, uuid_t uuid) {
 
         uuid_string[++string_pos] = '-';
     }
+    uuid_string[++string_pos] = 0;
+}
+
+char* random_uuid_string(void) {
+    uuid_t uuid = generate_uuid();
+
+    char* result = malloc(UUID_STR_LEN);
+    uuid_to_string(result, uuid);
+
+    return result;
 }
