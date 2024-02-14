@@ -372,7 +372,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define UUID_NUM_BYTES  UUID_NUM_BITS / 8
 #define UUID_NUM_UINTS  UUID_NUM_BYTES / 2
 
-#define UUID_STR_LEN    UUID_NUM_BYTES + 4 + 1
+#define UUID_STR_LEN            2 * UUID_NUM_BYTES + 5 + 1
+#define UUID_NUM_CHAR_GROUPS    5
 
 typedef struct uuid_t {
     unsigned int parts[UUID_NUM_UINTS];
@@ -387,11 +388,55 @@ uuid_t generate_uuid(void) {
         uuid.parts[i] = rand();
     }
 
+    // version 4
     uuid.parts[3] &= 0x0fff;
     uuid.parts[3] |= 0x4000;
 
+    // variant 1
     uuid.parts[4] &= 0x3fff;
     uuid.parts[4] |= 0x8000;
 
     return uuid;
+}
+
+const char PROGMEM hex_symbols[] = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'a', 'b', 'c', 'd', 'e', 'f',
+};
+
+const char PROGMEM uuid_char_groups[UUID_NUM_CHAR_GROUPS] = {
+    8, 4, 4, 4, 12,
+};
+
+void write_uuid_uint(
+    char* uuid_string,
+    unsigned int value,
+    unsigned short int position
+) {
+    unsigned short int first = value & 0xff;
+    uuid_string[position] = hex_symbols[first];
+
+    unsigned short int second = value >> 8;
+    uuid_string[position + 1] = hex_symbols[second];
+}
+
+void uuid_to_string(char* uuid_string, uuid_t uuid) {
+    unsigned short int current = 0;
+    unsigned short int string_pos = 0;
+    for (int group = 0; group < UUID_NUM_CHAR_GROUPS; group++) {
+        char chars = uuid_char_groups[group];
+
+        for (int i = 0; i < chars; i += 4) {
+            write_uuid_uint(
+                uuid_string,
+                uuid.parts[current],
+                string_pos
+            );
+
+            current += 1;
+            string_pos += 4;
+        }
+
+        uuid_string[++string_pos] = '-';
+    }
 }
