@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "i18n.h"
+#include <time.h>
 #define MOON_LED_LEVEL LED_LEVEL
 
 enum custom_keycodes {
@@ -365,3 +366,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+// UUID
+
+#define UUID_NUM_BITS   128
+#define UUID_NUM_BYTES  UUID_NUM_BITS / 8
+#define UUID_NUM_UINTS  UUID_NUM_BYTES / 2
+
+#define UUID_STR_LEN    UUID_NUM_BYTES + 4 + 1
+
+typedef struct uuid_t {
+    unsigned int parts[UUID_NUM_UINTS];
+} uuid_t;
+
+uuid_t generate_uuid(void) {
+    time_t t;
+    srand((unsigned) time(&t));
+
+    uuid_t uuid;
+    for (int i = 0; i < UUID_NUM_UINTS; i++) {
+        uuid.parts[i] = rand();
+    }
+
+    uuid.parts[3] &= 0x0fff;
+    uuid.parts[3] |= 0x4000;
+
+    uuid.parts[4] &= 0x3fff;
+    uuid.parts[4] |= 0x8000;
+
+    return uuid;
+}
