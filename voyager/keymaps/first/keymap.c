@@ -310,6 +310,9 @@ void move_and_switch(char *workspace, keyrecord_t *record) {
 
 char* random_uuid_string(void);
 void output_uuid(void) {
+    if (!record->event.pressed) {
+        return;
+    }
     char* uuid_string = random_uuid_string();
     SEND_STRING(uuid_string);
     free(uuid_string);
@@ -372,7 +375,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       move_and_switch("9", record);
       return false;
     case KC_UUID:
-      output_uuid();
+      output_uuid(record);
       return false;
   }
   return true;
@@ -420,16 +423,28 @@ const char PROGMEM uuid_char_groups[UUID_NUM_CHAR_GROUPS] = {
     8, 4, 4, 4, 12,
 };
 
+void write_uuid_byte(
+    char* uuid_string,
+    unsigned short int value,
+    unsigned short int position
+) {
+    unsigned short int first = value & 0xf;
+    uuid_string[position] = hex_symbols[first];
+
+    unsigned short int second = value >> 4;
+    uuid_string[position + 1] = hex_symbols[second];
+}
+
 void write_uuid_uint(
     char* uuid_string,
     unsigned int value,
     unsigned short int position
 ) {
     unsigned short int first = value & 0xff;
-    uuid_string[position] = hex_symbols[first];
+    write_uuid_byte(uuid_string, first, position);
 
     unsigned short int second = value >> 8;
-    uuid_string[position + 1] = hex_symbols[second];
+    write_uuid_byte(uuid_string, second, position + 2);
 }
 
 void uuid_to_string(char* uuid_string, uuid_t uuid) {
@@ -462,3 +477,5 @@ char* random_uuid_string(void) {
 
     return result;
 }
+
+// online debug https://onlinegdb.com/BkKBQNuP0
