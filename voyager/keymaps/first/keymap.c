@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "i18n.h"
-#include <time.h>
+#include "uuid/uuid.h"
 #define MOON_LED_LEVEL LED_LEVEL
 
 enum custom_keycodes {
@@ -308,8 +308,7 @@ void move_and_switch(char *workspace, keyrecord_t *record) {
     unregister_code(KC_LGUI);
 }
 
-char* random_uuid_string(void);
-void output_uuid(void) {
+void output_uuid(keyrecord_t *record) {
     if (!record->event.pressed) {
         return;
     }
@@ -383,6 +382,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 // UUID
 
+/*
 #define UUID_NUM_BITS   128
 #define UUID_NUM_BYTES  UUID_NUM_BITS / 8
 #define UUID_NUM_UINTS  UUID_NUM_BYTES / 2
@@ -477,5 +477,4 @@ char* random_uuid_string(void) {
 
     return result;
 }
-
-// online debug https://onlinegdb.com/BkKBQNuP0
+*/
