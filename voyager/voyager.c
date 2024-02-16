@@ -106,6 +106,8 @@ void keyboard_pre_init_kb(void) {
 
     chThdCreateStatic(waLEDThread, sizeof(waLEDThread), NORMALPRIO - 16, LEDThread, NULL);
     keyboard_pre_init_user();
+
+    timer_init();
 }
 
 #if !defined(VOYAGER_USER_LEDS)

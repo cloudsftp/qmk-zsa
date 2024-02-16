@@ -309,11 +309,9 @@ void move_and_switch(char *workspace, keyrecord_t *record) {
 }
 
 void output_uuid(keyrecord_t *record) {
-    timer_init();
     if (!record->event.pressed) {
         return;
     }
-
 
     unsigned int seed = timer_read();
     char* uuid_string = random_uuid_string(seed);
