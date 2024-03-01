@@ -23,5 +23,6 @@
 #define DE_LBRC ALGR(KC_8)
 #define DE_RBRC ALGR(KC_9)
 #define DE_ASTR S(KC_RBRC)
+#define DE_AMPR S(KC_6)
 #define DE_ADIA KC_QUOT
 #define DE_UDIA KC_LBRC

@@ -31,6 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                     LT(1,KC_SPC),   LT(2,KC_TAB),                                   KC_BSPC,  LT(1,KC_ENTER)
   ),
 
+  // Umlauts
   [7] = LAYOUT_voyager(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, DE_UE,          KC_TRANSPARENT, DE_OE,          KC_TRANSPARENT, KC_TRANSPARENT,
@@ -377,6 +378,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MOVE_AND_SWITCH_9:
       move_and_switch("9", record);
       return false;
+    // Random
     case KC_UUID:
       output_uuid(record);
       return false;
