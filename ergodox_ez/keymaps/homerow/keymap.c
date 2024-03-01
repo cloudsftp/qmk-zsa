@@ -14,6 +14,7 @@ enum custom_keycodes {
   MOVE_AND_SWITCH_7,
   MOVE_AND_SWITCH_8,
   MOVE_AND_SWITCH_9,
+  KC_UUID,
 };
 
 
@@ -111,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Movement
   [7] = LAYOUT_ergodox_pretty(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_TRANSPARENT, KC_UUID,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                KC_TRANSPARENT, KC_HOME,        KC_PAGE_DOWN,   KC_PAGE_UP,     KC_END,         KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,
@@ -143,6 +144,21 @@ void move_and_switch(uint16_t workspace, keyrecord_t *record) {
     unregister_code(KC_LGUI);
   }
 }
+
+/*
+void output_uuid(keyrecord_t *record) {
+    if (!record->event.pressed) {
+        return;
+    }
+
+    unsigned int seed = timer_read();
+    char* uuid_string = random_uuid_string(seed);
+
+    SEND_STRING(uuid_string);
+
+    free(uuid_string);
+}
+*/
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -177,6 +193,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MOVE_AND_SWITCH_9:
       move_and_switch(KC_9, record);
       return false;
+    // Random
+    /*
+    case KC_UUID:
+      output_uuid(record);
+      return false;
+    */
   }
   return true;
 }

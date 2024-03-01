@@ -387,6 +387,8 @@ void eeconfig_init_kb(void) {  // EEPROM is getting reset!
     keyboard_config.led_level         = 4;
     eeconfig_update_kb(keyboard_config.raw);
     eeconfig_init_user();
+
+    timer_init();
 }
 
 #ifdef DYNAMIC_MACRO_ENABLE

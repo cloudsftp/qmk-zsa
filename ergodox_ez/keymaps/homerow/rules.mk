@@ -8,3 +8,5 @@ SPACE_CADET_ENABLE = no
 COMBO_ENABLE = yes
 RGBLIGHT_ENABLE = no
 LTO_ENABLE = yes
+
+#SRC += uuid/uuid.c
